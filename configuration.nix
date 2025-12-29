@@ -9,6 +9,7 @@
       ./modules/networking.nix
       ./modules/security.nix
       ./modules/zsh.nix
+      ./modules/nvim/tiny.nix
     ];
 
   # Bootloader.
