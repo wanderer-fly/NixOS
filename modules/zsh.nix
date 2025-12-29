@@ -1,7 +1,8 @@
 { config, pkgs, ... }:
 
 let
-  userHome = "/home/wanderer";
+  user = "wanderer";
+  userHome = "/home/${user}";
 in
 {
   programs.zsh = {
@@ -11,6 +12,10 @@ in
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
     promptInit = ''
+      if [[ -o login ]] && command -v fastfetch > /dev/null; then
+        fastfetch
+      fi
+
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
       if [[ -r "''${XDG_CACHE_HOME:-''$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
         source "''${XDG_CACHE_HOME:-''$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
